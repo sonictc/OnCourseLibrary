@@ -1,0 +1,480 @@
+Name: Items
+Type: FolderType
+Children:
+- Name: ModbusTCPServerLogic
+  Type: ObjectLibraryItem
+  Children:
+  - Name: ModbusTCPServerLogic
+    Id: g=f0a85499f82018e3d5d99c466ef4f7f4
+    Supertype: NetLogic
+    ReferenceType: HasComponent
+- Name: MQTTLogic
+  Type: ObjectLibraryItem
+  Description: {"LocaleId":"","Text":"[Experimental/Sample content]\nMQTT Logic script allows to:\n- Create an MQTT broker by configuring MQTTServer\n- Create an MQTT client used to publish and subscribe data\n- Push data from DataLogger, EventLogger, and table from store\n\nRequired NuGet packages:\n- MQTTnet V3.1.2 by \"The contributors of MQTTnet\" \n- MQTTnet.Extensions.ManagedClient V3.1.2 by \"The contributors of MQTTnet\" \n- Newtonsoft.Json V13.0.1 by \"James Newton-King\" [Link](by \"The contributors of MQTTnet\" \n- M2MQTT V4.3.0 by Paolo Patierno \n"}
+  Children:
+  - Name: MQTTLogic
+    Id: g=047e079393e981c6313b52f5c18ab8a5
+    Supertype: NetLogic
+    ReferenceType: HasComponent
+    Children:
+    - Class: Method
+      Name: StartListeningToVariables
+    - Name: MqttServer
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+      Children:
+      - Name: IPAddress
+        Type: BaseDataVariableType
+        DataType: String
+        Value: ""
+      - Name: Port
+        Type: BaseDataVariableType
+        DataType: UInt16
+        Value: 0
+      - Name: UseSSL
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: Certificate
+          Type: BaseDataVariableType
+          DataType: ResourceUri
+          Value: ""
+        - Name: CertificatePassword
+          Type: BaseDataVariableType
+          DataType: Password
+          Value: ""
+      - Name: AutoStart
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: UserAuthentication
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: AuthorizedUsers
+          Type: BaseDataVariableType
+          DataType: String
+          ValueRank: OneDimension
+          ArrayDimensions: [0]
+          Value: []
+      - Name: IsRunning
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: IsDebuggingMode
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: MaxNumberOfConnections
+        Type: BaseDataVariableType
+        DataType: Int32
+        Value: 0
+      - Name: NumberOfConnections
+        Type: BaseDataVariableType
+        DataType: Int32
+        Value: 0
+    - Name: MqttClient
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: true
+      Children:
+      - Name: IPAddress
+        Type: BaseDataVariableType
+        DataType: String
+        Value: ""
+      - Name: Port
+        Type: BaseDataVariableType
+        DataType: UInt16
+        Value: 0
+      - Name: UseSSL
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: CaCertificate
+          Type: BaseDataVariableType
+          DataType: ResourceUri
+          Value: ""
+        - Name: ClientCertificate
+          Type: BaseDataVariableType
+          DataType: ResourceUri
+          Value: ""
+        - Name: ClientCertificatePassword
+          Type: BaseDataVariableType
+          DataType: Password
+          Value: ""
+        - Name: AllowUntrustedCertificates
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+      - Name: UserAuthentication
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: AuthorizedUsers
+          Type: BaseDataVariableType
+          DataType: String
+          ValueRank: OneDimension
+          ArrayDimensions: [0]
+          Value: []
+      - Name: IsRunning
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: IsDebuggingMode
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: ClientId
+        Type: BaseDataVariableType
+        DataType: String
+        Value: ""
+      - Name: Connected
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+      - Name: SentPackages
+        Type: BaseDataVariableType
+        DataType: Int32
+        Value: 0
+      - Name: ReceivedPackages
+        Type: BaseDataVariableType
+        DataType: Int32
+        Value: 0
+    - Class: Method
+      Name: StartMQTTServer
+    - Name: Subscriber
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+      Children:
+      - Name: LiveTags
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: true
+        Children:
+        - Name: LiveTagsFolder
+          Type: NodePointer
+          DataType: NodeId
+          Value: {"IdType":0,"Id":0,"Namespace":-1}
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: NodeClass
+            Type: PropertyType
+            DataType: NodePointerNodeClass
+            ModellingRule: Optional
+            Value: 0
+        - Name: LiveTagsTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+        - Name: LastPackageTimestamp
+          Type: BaseDataVariableType
+          DataType: DateTime
+          Value: "1601-01-01T00:00:00.0000000"
+      - Name: StoreTables
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: Store
+          Type: NodePointer
+          DataType: NodeId
+          Value: {"IdType":0,"Id":0,"Namespace":-1}
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"Id":1,"Namespace":5}
+        - Name: StoreTablesTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+      - Name: CustomPayload
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: CustomPayloadMessage
+          Type: BaseDataVariableType
+          DataType: String
+          Value: "0"
+        - Name: CustomPayloadTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+    - Name: Publisher
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: true
+      Children:
+      - Name: LiveTags
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: true
+        Children:
+        - Name: LiveTagsPeriod
+          Type: BaseDataVariableType
+          DataType: Duration
+          Value: "0:00:00:0.0000000"
+        - Name: LiveTagsFolder
+          Type: NodePointer
+          DataType: NodeId
+          Value: {"IdType":0,"Id":0,"Namespace":-1}
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: NodeClass
+            Type: PropertyType
+            DataType: NodePointerNodeClass
+            ModellingRule: Optional
+            Value: 0
+        - Name: LiveTagsTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+        - Name: QoS
+          Type: BaseDataVariableType
+          DataType: Int32
+          Value: 0
+        - Name: Retain
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+      - Name: StoreTables
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: Store
+          Type: NodePointer
+          DataType: NodeId
+          Value: {"IdType":0,"Id":0,"Namespace":-1}
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"Id":1,"Namespace":5}
+        - Name: TableNames
+          Type: BaseDataVariableType
+          DataType: Int32
+          Value: 0
+          Children:
+          - Name: Table1
+            Type: BaseDataVariableType
+            DataType: String
+            Value: ""
+          - Name: Table2
+            Type: BaseDataVariableType
+            DataType: String
+            Value: ""
+        - Name: PreserveData
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+        - Name: MaximumItemsPerPacket
+          Type: BaseDataVariableType
+          DataType: Int32
+          Value: 0
+        - Name: MaximumPublishTime
+          Type: BaseDataVariableType
+          DataType: Duration
+          Value: "0:00:00:0.0000000"
+        - Name: MinimumPublishTime
+          Type: BaseDataVariableType
+          DataType: Duration
+          Value: "0:00:00:0.0000000"
+        - Name: StoreTablesTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+        - Name: QoS
+          Type: BaseDataVariableType
+          DataType: Int32
+          Value: 0
+        - Name: Retain
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+        - Name: TablesPrefix
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+        - Name: AllRows
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+      - Name: CustomPayload
+        Type: BaseDataVariableType
+        DataType: Boolean
+        Value: false
+        Children:
+        - Name: CustomPayloadMessage
+          Type: BaseDataVariableType
+          DataType: String
+          Value: "0"
+        - Name: CustomPayloadTopic
+          Type: BaseDataVariableType
+          DataType: String
+          Value: ""
+        - Name: CustomPayloadPeriod
+          Type: BaseDataVariableType
+          DataType: Duration
+          Value: "0:00:00:0.0000000"
+        - Name: QoS
+          Type: BaseDataVariableType
+          DataType: Int32
+          Value: 0
+        - Name: Retain
+          Type: BaseDataVariableType
+          DataType: Boolean
+          Value: false
+    - Class: Method
+      Name: FetchData
+    - Class: Method
+      Name: StartCustomPayload
+- Name: PushAgent
+  Type: ObjectLibraryItem
+  Description: {"LocaleId":"","Text":"DESCRIPTION\nAllows sending data from a  DataLogger to the Cloud. This script periodically takes data from the DataLogger and sends it to the Cloud encapsulated in a JSON. \nThe PushAgent implements the Store&Forward mechanism that takes data from the DataLogger and saves it in a auxialiary store from which the data is extracted and sent to the Cloud.\nThe script supports two transfer modes:\n- By line: send one line of the DataLogger per packet\n- By variable: send one or more variables with their related information\n\nIn addition, you can set the mode with which data is sent and historicized in the DataLogger. If you do not want the data to be historicized, the data sent will be removed from the DataLogger once they are saved in the auxialiary store.\n"}
+  Children:
+  - Name: PushAgent
+    Id: g=1a4841c11b3b4f41a37e8448f1099765
+    Supertype: NetLogic
+    ReferenceType: HasComponent
+    Children:
+    - Name: DataLogger
+      Type: NodePointer
+      DataType: NodeId
+      Value: {"IdType":0,"Id":0,"Namespace":-1}
+      Children:
+      - Name: Kind
+        Type: PropertyType
+        DataType: NodeId
+        Value: {"Id":3,"Namespace":6}
+    - Name: PushFullSample
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+    - Name: PreserveDataLoggerHistory
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+    - Name: MaximumStoreCapacity
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: MaximumItemsPerPacket
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: MaximumPublishTime
+      Type: BaseDataVariableType
+      DataType: Duration
+      Value: "0:00:00:0.0000000"
+    - Name: MinimumPublishTime
+      Type: BaseDataVariableType
+      DataType: Duration
+      Value: "0:00:00:0.0000000"
+    - Name: ClientId
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
+    - Name: BrokerIPAddress
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
+    - Name: BrokerPort
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: BrokerTopic
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
+    - Name: QoS
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: UseSSL
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+      Children:
+      - Name: CACert
+        Type: BaseDataVariableType
+        DataType: ResourceUri
+        Value: ""
+      - Name: ClientCert
+        Type: BaseDataVariableType
+        DataType: ResourceUri
+        Value: ""
+      - Name: ClientCertPassword
+        Type: BaseDataVariableType
+        DataType: Password
+        Value: ""
+    - Name: Username
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
+    - Name: Password
+      Type: BaseDataVariableType
+      DataType: Password
+      Value: ""
+- Name: FileSignVerify
+  Type: ObjectLibraryItem
+  Description: {"LocaleId":"","Text":"DESCRIPTION\nThis widget provides three methods to use when you need to create signed files or verify the integrity of signed files.\nThe exposed methods are:\n- GeneratePublicAndPrivateKey: allows to create the public/private key pair for signing files (if you do not already have one)\n- SignFile: allows to sign the file passed as parameter\n- VerifyFileSignature: allows to verify the integrity of file and signature passed as parameters\n\nSETUP\nDrop the widget into the NetLogic folder of your project and configure its PublicKey and PrivateKey properties.\nUse the provided methods to sign and/or verify any kind of file.\n\nNOTES\nThe private and public key files must be .pem format"}
+  Children:
+  - Name: FileSignVerify
+    Id: g=c59927e8c8a53470961ccb12a383063d
+    Supertype: NetLogic
+    ReferenceType: HasComponent
+    Children:
+    - Name: PublicKey
+      Type: BaseDataVariableType
+      DataType: ResourceUri
+      Value: ""
+    - Name: PrivateKey
+      Type: BaseDataVariableType
+      DataType: ResourceUri
+      Value: ""
+    - Class: Method
+      Name: SignFile
+      Children:
+      - Name: ns=0;InputArguments
+        Type: BaseVariableType
+        DataType: Argument
+        ReferenceType: HasProperty
+        ModellingRule: None
+        ValueRank: OneDimension
+        ArrayDimensions: [0]
+        Value: [{"TypeId":{"Id":296},"Body":{"Name":"filePath","DataType":{"Id":12},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+    - Class: Method
+      Name: VerifyFileSignature
+      Children:
+      - Name: ns=0;InputArguments
+        Type: BaseVariableType
+        DataType: Argument
+        ReferenceType: HasProperty
+        ModellingRule: None
+        ValueRank: OneDimension
+        ArrayDimensions: [0]
+        Value: [{"TypeId":{"Id":296},"Body":{"Name":"filePath","DataType":{"Id":12},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}},{"TypeId":{"Id":296},"Body":{"Name":"signatureFilePath","DataType":{"Id":12},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+      - Name: OutputArguments
+        Type: BaseVariableType
+        DataType: Argument
+        ReferenceType: HasProperty
+        ModellingRule: None
+        ValueRank: OneDimension
+        ArrayDimensions: [0]
+        Value: [{"TypeId":{"Id":296},"Body":{"Name":"verifyResult","DataType":{"Id":1},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+    - Class: Method
+      Name: GeneratePublicAndPrivateKey
